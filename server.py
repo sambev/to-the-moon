@@ -38,15 +38,20 @@ def index():
 @app.route('/users/', methods=['PUT'])
 def users():
     if request.method == 'PUT':
-        print request.data
+        print 'REQUEST DATA', request.data
         req_data = json.loads(request.data)
         for user in app.team['users']:
             if user['name'] == req_data['name']:
                 user['miles'] += req_data['miles']
+                return Response(json.dumps(user))
+
+        app.team['users'].append(req_data)
+        return Response(json.dumps(req_data))
 
 
 @app.route('/teams/')
 def teams():
+    print app.team
     return Response(json.dumps(app.team))
 
 
