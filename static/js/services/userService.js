@@ -33,12 +33,15 @@ userApp.factory('UserService', function() {
                     }
                 ],
 
+
+
         /*
          * @property total_miles
          * @type {Int} - total amount of miles for this user group
          * Maybe this doesn't actually belong on this service
          */
         total_miles: 0,
+        goal_miles: 1000,
 
         /*
          * @method initTotalMiles - initialize the total amount of miles

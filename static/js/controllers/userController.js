@@ -4,6 +4,16 @@
 userApp.controller('userController', function( $scope, UserService ){
     $scope.users = UserService.getUsers();
     $scope.total_miles = UserService.initTotalMiles();
+    $scope.goal_miles = UserService.goal_miles;
+
+    $scope.currentTab = 'profile'
+
+    // View Controls //////////////////
+    $scope.goToTab = function (tabName) {
+        $scope.currentTab = tabName;
+    }
+
+    // End view controls //////////////
 
     /*
      * @method addMiles

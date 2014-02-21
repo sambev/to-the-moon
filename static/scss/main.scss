@@ -1,0 +1,88 @@
+$site-width: 760px;
+$site-vertical-pad: 10px;
+$site-primary-color: #313131;
+
+$controls-inset-top: 20px;
+$controls-inset-side: 50px;
+$controls-inset-bottom: 20px;
+$controls-vertical-spacing: 100px;
+$control-background: white;
+$control-background-dark: grey;
+$control-padding: 10px;
+$control-disabled-color: grey;
+
+
+
+@mixin standard-borders {
+	border: 1px solid $site-primary-color;
+}
+
+* {
+	//border: 1px solid $site-primary-color;
+	box-display: border-box;
+}
+
+.main-page {
+	//width: $site-width;
+	margin: 0px auto;
+	//padding-top: $site-vertical-pad;
+	position: relative;
+}
+
+.controls-overlay {
+
+	position: fixed;
+	width: 100%;
+	.control-element {
+		margin: 10px 0px;
+		position: fixed;
+		left: $controls-inset-side;	
+		background-color: $control-background;
+	}
+	.logo {
+
+		background-color: transparent;
+	}
+	.side-menu {
+		bottom: $controls-inset-bottom;
+		background-color: transparent;
+		.menu-buttons {
+			float: left;
+			background-color: transparent;		input[type=radio] {
+				display:none;
+				&:checked + label{
+					background-color: $control-background;
+				}
+				& + label {
+					overflow: hidden; 
+					height: 40px;
+					width: 40px;
+					display: block;
+					margin: 0px;
+					//border-top-left-radius: 5px;
+					//border-bottom-left-radius: 5px;
+					@include standard-borders;
+					padding: 5px;
+					background-color: $control-disabled-color;
+					list-style-type:none;
+				}
+			}
+		}
+		.menu-display {
+			padding: $control-padding;
+			float: left;
+			min-width: 250px;
+			background-color: $control-background;
+			@include standard-borders;
+			//border-radius: 5px;
+			min-height: 250px;
+		}
+	}
+}
+
+.map-itself {
+	width: 100%;
+}
+.logo-img {
+	width: 100px;
+}
