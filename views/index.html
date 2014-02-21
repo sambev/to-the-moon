@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To The Moon</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+</head>
+<body>
+    <div ng-app="UserApp">
+        <div class="row">
+            <div class="small-12 columns">
+                <h1>To The Moon</h1>
+            </div>
+            <div ng-controller="userController">
+                <div ng-repeat="user in users">
+                    <div class="row">
+                        <div class="small-2 columns">
+                            <h4>{{ user.name }}</h4>
+                        </div>
+                        <div class="small-2 columns">
+                            <h4>{{ user.miles }}</h4>
+                        </div>
+                        <div class="small-1 columns">
+                            <input class="add_miles" type="text" ng-model="add_miles" />
+                        </div>
+                        <div class="small-4 columns end">
+                            <a href="#" class="button" ng-click="addMiles(user.id, add_miles)">Add Miles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-4 columns">
+                        <h4>Total: {{ total_miles }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/vendor/angular/angular.min.js"></script>
+    <script src="/static/js/apps/userapp.js"></script>
+    <script src="/static/js/controllers/userController.js"></script>
+    <script src="/static/js/services/userService.js"></script>
+</body>
+</html>
