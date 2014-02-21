@@ -1,42 +1,54 @@
-from flask import Flask
+from flask import Flask, request, Response
 from config.jinjacfg import render
+import json
 
 
 app = Flask(__name__)
 
 
-def buildApp(env='dev'):
+from config.dev import config
+app.config.update(config)
 
-    # Get the right config for the environment
-    if env == 'dev':
-        from config.dev import config
-        app.config.update(config)
-    elif env == 'test':
-        from config.test import config
-        app.config.update(config)
-    elif env == 'production':
-        from config.production import config
-        app.config.update(config)
-
-
-    @app.route("/")
-    def index():
-        return render('index.html')
-
-
-    @app.route('/users/')
-    def users():
-        return 'Users'
-
-
-    @app.route('/users/<id>')
-    def usersId():
-        return 'User ids'
+app.team = {
+    "id": 1,
+    "name": "Startup Weekend",
+    "goal_miles": 1200,
+    "users": [
+        {
+            "name": "sam",
+            "miles": 1
+        },
+        {
+            "name": "dean",
+            "miles": 32
+        },
+        {
+            "name": "steve",
+            "miles": 0
+        }
+    ]
+}
 
 
-    return app
+@app.route("/")
+def index():
+    return render('index.html')
+
+
+@app.route('/users/', methods=['PUT'])
+def users():
+    if request.method == 'PUT':
+        print request.data
+        req_data = json.loads(request.data)
+        for user in app.team['users']:
+            if user['name'] == req_data['name']:
+                user['miles'] += req_data['miles']
+
+
+@app.route('/teams/')
+def teams():
+    return Response(json.dumps(app.team))
 
 
 if __name__ == "__main__":
-    app = buildApp()
     app.run()
