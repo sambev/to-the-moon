@@ -22,7 +22,7 @@ $.ajax({
     console.log(JSON.parse(res));
     res = JSON.parse(res);
     res["users"].forEach(function(d){
-      total += d.miles;
+      total += d.distance;
     });
     console.log(total);
     progressMiles = total;
