@@ -1,0 +1,19 @@
+[{
+    "id": 1,
+    "name": "Startup Weekend",
+    "goal_miles": 1200,
+    "users": [
+        {
+            "name": "Sam",
+            "miles": 1
+        },
+        {
+            "name": "Dean",
+            "miles": 32
+        },
+        {
+            "name": "Steve",
+            "miles": 0
+        }
+    ]
+}]

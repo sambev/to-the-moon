@@ -1,54 +1,33 @@
 /*
  * UserService, used for tracking everything about users
- * Thus far this includes: id, name, miles
+ * Thus far this includes: id, name, distance
  * @class UserService
  */
-userApp.factory('UserService', function() {
+userApp.factory('UserService', function( $http ) {
     var UserService = {
         /*
          * @property users
          * @type {Array} - array of user objects
          * TODO don't fake this out
          */
-        users: [
-                    {
-                        'id': 1,
-                        'name': 'Sean Brown',
-                        'miles': 10
-                    },
-                    {
-                        'id': 2,
-                        'name': 'Dean Cheesman',
-                        'miles': 9
-                    },
-                    {
-                        'id': 3,
-                        'name': 'Chris Crosby',
-                        'miles': 20
-                    },
-                    {
-                        'id': 4,
-                        'name': 'Sam Beveridge',
-                        'miles': 1
-                    }
-                ],
+        users: [],
 
         /*
-         * @property total_miles
-         * @type {Int} - total amount of miles for this user group
+         * @property total_distance
+         * @type {Int} - total amount of distance for this user group
          * Maybe this doesn't actually belong on this service
          */
-        total_miles: 0,
+        total_distance: 0,
 
         /*
-         * @method initTotalMiles - initialize the total amount of miles
-         * @return {Int} - total amount of miles between users
+         * @method initTotalDistance - initialize the total amount of distance
+         * @return {Int} - total amount of distance between users
          */
-        initTotalMiles: function() {
+        initTotalDistance: function() {
             for (var i = this.users.length - 1; i >= 0; i--) {
-                this.total_miles += parseInt(this.users[i].miles);
+                this.total_distance += parseInt(this.users[i].distance);
             };
-            return this.total_miles;
+            return this.total_distance;
         },
 
         /*
@@ -56,26 +35,45 @@ userApp.factory('UserService', function() {
          * @return {Array} - array of all users
          */
         getUsers: function() {
-            return this.users;
+            var req = $http({ method: 'GET', url: '/teams/' });
+            req.success(function( data, status, headers, config ){
+                UserService.users = data.users;
+            });
+            return req;
         },
 
         /*
-         * @method addMiles - add some miles to a specific user, increment total
-         *                    miles
+         * @method addDistance - add some distance to a specific user, increent total
+         *                    distance
          * @param user_id
-         * @type {Int} - id of the user to add miles
+         * @type {Int} - id of the user to add distance
          *
-         * @param miles
-         * @type {Int} - miles to add to the user
+         * @param distance
+         * @type {Int} - distance to add to the user
          */
-        addMiles: function(user_id, miles) {
+        addDistance: function(user_id, distance) {
+            console.log(distance);
             for (var i = this.users.length - 1; i >= 0; i--) {
                 if (this.users[i].id == user_id) {
-                    this.users[i].miles += parseInt(miles);
+                    var put_data = {
+                        'name': this.users[i].name,
+                        'distance': distance
+                    };
+                    this.users[i].distance += parseInt(distance);
+                    $http({ method: 'PUT', url: '/users/', data: put_data })
+                        .success(function( data, status, headers, config ) {
+                            console.log(data);
+                        });
                 }
             };
             // Recalculate total
-            this.total_miles += parseInt(miles);
+            this.total_distance += parseInt(distance);
+        },
+
+        updateDistances: function() {
+            for (var i = this.users.length - 1; i >= 0; i--) {
+                this.users[i]
+            };
         }
     }
 

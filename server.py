@@ -15,16 +15,19 @@ app.team = {
     "goal_miles": 1200,
     "users": [
         {
+            "id": 1,
             "name": "sam",
-            "miles": 1
+            "distance": 1
         },
         {
+            "id": 2,
             "name": "dean",
-            "miles": 32
+            "distance": 32
         },
         {
+            "id": 3,
             "name": "steve",
-            "miles": 0
+            "distance": 0
         }
     ]
 }
@@ -38,21 +41,24 @@ def index():
 @app.route('/users/', methods=['PUT'])
 def users():
     if request.method == 'PUT':
-        print 'REQUEST DATA', request.data
         req_data = json.loads(request.data)
+        print request.data
+        # normal distance to a float
+        req_data['distance'] = float(req_data['distance'])
         for user in app.team['users']:
             if user['name'] == req_data['name']:
-                user['miles'] += req_data['miles']
-                return Response(json.dumps(user))
+                user['distance'] += float(req_data['distance'])
+                return Response(json.dumps(user), status=201)
 
         app.team['users'].append(req_data)
-        return Response(json.dumps(req_data))
+        return Response(json.dumps(req_data), status=201)
 
 
-@app.route('/teams/')
+@app.route('/teams/', methods=['GET'])
 def teams():
-    print app.team
-    return Response(json.dumps(app.team))
+    if request.method == 'GET':
+        print app.team
+        return Response(json.dumps(app.team))
 
 
 if __name__ == "__main__":

@@ -11,26 +11,38 @@
             <div class="small-12 columns">
                 <h1>To The Moon</h1>
             </div>
-            <div ng-controller="userController">
-                <div ng-repeat="user in users">
-                    <div class="row">
-                        <div class="small-2 columns">
-                            <h4>{{ user.name }}</h4>
+            <div class="row">
+                <div class="small-4 columns">
+                    <div ng-controller="userController">
+                        <div ng-repeat="user in users">
+                            <div class="row">
+                                <div class="small-6 columns">
+                                    <h4>{{ user.name }}</h4>
+                                </div>
+                                <div class="small-6 columns">
+                                    <h4>{{ user.distance }}</h4>
+                                </div>
+                            </div>
                         </div>
-                        <div class="small-2 columns">
-                            <h4>{{ user.miles }}</h4>
-                        </div>
-                        <div class="small-1 columns">
-                            <input class="add_miles" type="text" ng-model="add_miles" />
-                        </div>
-                        <div class="small-4 columns end">
-                            <a href="#" class="button" ng-click="addMiles(user.id, add_miles)">Add Miles</a>
+                        <div class="row">
+                            <div class="small-4 columns">
+                                <h4>Total: {{ total_distance }}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="small-4 columns">
-                        <h4>Total: {{ total_miles }}</h4>
+                <div class="small-6 columns end">
+                    <div ng-controller="distanceController">
+                        <div ng-repeat="user in users">
+                            <div class="row">
+                                <div class="small-1 columns">
+                                    <input class="add_distance" type="text" ng-model="distance" />
+                                </div>
+                                <div class="small-4 columns end">
+                                    <a href="#" class="button" ng-click="addDistance(user.id, distance)">Add Distance</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
