@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/tothemoon.css">
     <link rel="stylesheet" href="/static/vendor/leaflet/dist/leaflet.css">
     <link href='http://fonts.googleapis.com/css?family=Abel|Wire+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/quick-override.css">
 </head>
 <body>
     <div ng-app="UserApp" style="height:100%;">
@@ -16,7 +17,7 @@
                 <h4>Mooners</h4>
                 <div class="row">
                     <div class="small-12 columns">
-                        <div ng-controller="userController">
+                        <div class="data" ng-controller="userController">
                             <div class="row" ng-repeat="user in users" style="color:white;">
                                 <div class="small-6 columns">
                                     {{ user.name }}
@@ -32,8 +33,8 @@
                 </div>
             <div class="row">
                 <div ng-controller="distanceController">
-                    <div class="small-6 columns">
-                        <input type="text" ng-model="add_distance" />
+                    <div class="small-6 columns distance-input">
+                        <input type="text" ng-model="add_distance" placeholder="how far did you run?"/>
                     </div>
                     <div class="small-6 columns">
                         <a href="#" class="button tiny" ng-click="addDistance(1, add_distance)">Add</a>
@@ -51,7 +52,7 @@
     <script src="/static/vendor/jquery/dist/jquery.js"></script>
     <script src="/static/js/apps/mapDraw.js"></script>
     <script src="/static/vendor/angular/angular.min.js"></script>
-    <script src="/static/js/apps/userapp.js"></script>
+    <script src="/static/js/apps/userApp.js"></script>
     <script src="/static/js/controllers/userController.js"></script>
     <script src="/static/js/services/userService.js"></script>
 </body>
