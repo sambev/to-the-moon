@@ -103,7 +103,9 @@ function buildMap(){
 }
 
 // create map
-var map = L.map('map');
+var map = L.map('map', {
+  scrollWheelZoom: false
+});
 
 
 function incrementProgress(){

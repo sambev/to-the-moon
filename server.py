@@ -17,12 +17,12 @@ app.team = {
         {
             "id": 1,
             "name": "sam",
-            "distance": 1
+            "distance": 0
         },
         {
             "id": 2,
             "name": "dean",
-            "distance": 32
+            "distance": 0
         },
         {
             "id": 3,
@@ -35,7 +35,7 @@ app.team = {
 
 @app.route("/")
 def index():
-    return render('jason-index.html')
+    return render('index.html')
 
 
 @app.route('/users/', methods=['PUT'])
