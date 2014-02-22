@@ -1,3 +1,15 @@
+// fake milestone data
+var milestones = [
+  {distance: 13 , label : 'Half Marathon'},
+  {distance: 26 , label : "Marathon"},
+  {distance: 126 , label : "Marathon"},
+  {distance: 326 , label : ""},
+  {distance: 356 , label : ""},
+  {distance: 1234 , label : ""},
+  {distance: 500, label : "Would you walk 500 more?"},
+  {distance: 767, label : "How fast sound can travel in an hour"}
+];
+
 // the current amount of miles traveled
 var progressMiles = +location.search.replace(/^\?/,"");
 
@@ -18,7 +30,10 @@ var progressPoint = [startPoint[0] + (progressPercent * (endPoint[0]-startPoint[
 var map = L.map('map');
 
 // select stame map style
-var stamen = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: 'Add some attributes here!'}).addTo(map);
+// var stamen = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: 'Add some attributes here!'}).addTo(map);
+var stamen = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {attribution: 'Add some attributes here!'}).addTo(map);
+// var stamen = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {attribution: 'Add some attributes here!'}).addTo(map);
+// var openStreet = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
 // start point pin
 var marker = L.marker(startPoint).addTo(map);
@@ -26,7 +41,7 @@ marker.bindPopup("<b>Hello world!</b><br>We're going to the New York! " + Math.r
 
 // end point pin
 var marker2 = L.marker(endPoint).addTo(map);
-marker2.bindPopup("Degrees: ");
+marker2.bindPopup((tripDistanceMiles - progressMiles) + " Miles To Go!");
 
 // progress pin
 var progressMarker = L.marker(progressPoint).addTo(map);
@@ -38,7 +53,22 @@ var polyline = L.polyline([
   progressPoint
 ]).addTo(map);
 
-// set the map to show distance
+// drop milestone pins reached. and the next one to be reached
+milestones.forEach(function(k){
+  if(k.distance <progressMiles){
+    L.circleMarker(milesToPoint(k.distance), {riseOnHover : true}).setRadius(6).addTo(map).bindPopup(k.distance + "Miles! " + k.label);
+  }
+});
+
+// convert a miles number into a latitude, longitude point
+function milesToPoint(miles){
+  var percent = Math.min(miles/tripDistanceMiles, 1);
+  var point = [startPoint[0] + (percent * (endPoint[0]-startPoint[0])), startPoint[1] + (percent * (endPoint[1]-startPoint[1]))];
+  return point;
+}
+
+
+// zoom in if the progress is small. Zoom out if you're above 15%
 if(progressPercent < .15){
   map.fitBounds([
     startPoint,
