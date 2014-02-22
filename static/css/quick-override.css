@@ -1,11 +1,20 @@
 h4 {
 	font-family: "Abel", sans-serif;
 	font-size: 50px;
+    padding-left: 15px;
 }
 
-.data {
-	font-size: 40px;
+.name {
+	font-size: 30px;
+    font-family: 'Wire One';
+    padding-top: 5px;
 }
+
+.miles {
+    font-size: 40px;
+    font-family: 'Wire One';
+}
+
 
 body {
 	background-color: #2B2A29;
