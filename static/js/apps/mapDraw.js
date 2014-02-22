@@ -3,10 +3,10 @@ var milestones = [
   {distance: 13 , label : 'Half Marathon'},
   {distance: 26.2 , label : "Marathon"},
   {distance: 42 , label : "This distance is the answer, but what is the question?"},
-  {distance: 0.10511, label : "The height of the Washington Monument"},
-  {distance: 0.25246, label : "The farthest thrown object ever (an aerobie!)"},
-  {distance: 0.3363, label : "The height of One World Trade Center"},
-  {distance: 0.5155, label : "The height of the Burj Khalifa, the worlds tallest building"},
+  {distance: 0.105, label : "The height of the Washington Monument"},
+  {distance: 0.252, label : "The farthest thrown object ever (an aerobie!)"},
+  {distance: 0.336, label : "The height of One World Trade Center"},
+  {distance: 0.515, label : "The height of the Burj Khalifa, the worlds tallest building"},
   {distance: 3.22, label : "Bullets can't hit you!  You've run farther than any of them can fly!"},
   {distance: 17, label : "The circumference of the Large Hadron Collider"},
   {distance: 21.46, label : "You've run around Halley's Comet."},
@@ -25,12 +25,31 @@ var milestones = [
   {distance: 1900, label : "Her name is Rio, and she's dancing on the Sand.  You've run the Rio Grande!"},
   {distance: 0.012, label : "Vous êtes un petit prince. You're run around asteroid B-612!"},
   {distance: 0.86, label : "Distance a blood cell flows in a day"},
-  {distance: 767, label : "How fast sound can travel in an hour"}
+  {distance: 767, label : "How fast sound can travel in an hour"},
+  {distance: 6.83, label : "The depth of the Mariana Trench"},
+  {distance: 5.49, label : "The elevation of Mount Everest"},
+  {distance: 22.2, label : "Distance travelled by Apollo 17 Lunar Rover"},
+  {distance: 1.84, label : "Height of LEGO bricks a single brick can support without plastic failure"},
 ];
 
-// the current amount of miles traveled
-// var progressMiles = +location.search.replace(/^\?/,"");
+//Custom Progress Icon
+var progressIcon = L.icon({
+    iconUrl: '/static/images/TTM-Milestone.png',
+    iconRetinaUrl: '/static/images/TTM-Milestone.png',
+    iconSize: [64, 66],
+    iconAnchor: [25, 51],
+    popupAnchor: [-3, -42],
+});
 
+var startEndIcon = L.icon({
+    iconUrl: '/static/images/TTM-StartEnd.png',
+    iconRetinaUrl: '/static/images/TTM-StartEnd.png',
+    iconSize: [64, 66],
+    iconAnchor: [25, 51],
+    popupAnchor: [-3, -42],
+});
+
+// the current amount of miles traveled
 var progressMiles = .001;
 var lastProgressMiles = 0;
 
@@ -79,7 +98,7 @@ function buildMap(){
 
   milestones.forEach(function(k){
     if(k.distance >= lastProgressMiles && k.distance < progressMiles){
-      var thisMarker = L.circleMarker(milesToPoint(k.distance), {riseOnHover : true});
+      var thisMarker = L.circleMarker(milesToPoint(k.distance), {riseOnHover : true, fillColor : 'white', fillOpacity : 1, color : '#2AC2E2', opacity : .9});
       thisMarker
         .setRadius(6)
         .addTo(map);
@@ -126,28 +145,28 @@ var stamen = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
 // var openStreet = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
 // progress pin
-var progressMarker = L.marker(startPoint).addTo(map);
+var progressMarker = L.marker(startPoint, {icon : progressIcon}).addTo(map);
 progressMarker.bindPopup("You've made it " + progressMiles + " miles!").openPopup();
 
 // start point pin
-var marker = L.marker(startPoint).addTo(map);
+var marker = L.marker(startPoint, {icon : startEndIcon}).addTo(map);
 marker.bindPopup("<b>Hello world!</b><br>We're going to the New York! " + Math.round(tripDistanceMiles) + " miles");
 
 // end point pin
-var marker2 = L.marker(endPoint).addTo(map);
+var marker2 = L.marker(endPoint, {icon : startEndIcon}).addTo(map);
 marker2.bindPopup((tripDistanceMiles - progressMiles) + " Miles To Go!");
 
 // drop milestone pins reached. and the next one to be reached
 milestones.forEach(function(k){
   if(k.distance < progressMiles){
-    L.circleMarker(milesToPoint(k.distance), {riseOnHover : true}).setRadius(6).addTo(map).bindPopup(k.distance + "Miles! " + k.label);
+    L.circleMarker(milesToPoint(k.distance), {riseOnHover : true, color : '#2AC2E2', opacity : .9}).setRadius(6).addTo(map).bindPopup(k.distance + "Miles! " + k.label);
   }
 });
 
 var polyline = L.polyline([
     startPoint,
     startPoint
-  ]).addTo(map);
+  ], {color : '#2AC2E2', opacity : .9}).addTo(map);
 
 
 function incrementProgress(){
