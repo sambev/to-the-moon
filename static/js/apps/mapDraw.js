@@ -52,7 +52,7 @@ $.ajax({
 });
 
 // manually setting latitude, longitude
-var startPoint = [40.24,-111.66];
+var startPoint = [40.2261491,-111.6606];
 var endPoint = [40.6700, -73.9400];
 
 // manual entry of distance in miles
@@ -69,7 +69,7 @@ function buildMap(){
   // progress pin
   // var progressMarker = L.marker(progressPoint).addTo(map);
   progressMarker.setLatLng(progressPoint).update();
-  progressMarker.bindPopup("You've made it " + progressMiles + " miles!" + '<a href="#">Share!</a>');
+  progressMarker.bindPopup("You've made it " + progressMiles.toFixed(2) + " miles!" + '<a href="#">Share!</a>');
 
   // progress line
   polyline.setLatLngs([
@@ -85,7 +85,7 @@ function buildMap(){
         .addTo(map);
       var thisPop = new L.popup()
         .setLatLng(milesToPoint(k.distance))
-        .setContent(k.distance + " Miles! " + k.label + '<a href="#"> Share! </a>')
+        .setContent(k.distance.toFixed(2) + " Miles! " + k.label + '<a href="#"> Share! </a>')
         .openOn(map);
       thisMarker.bindPopup(thisPop);
     }
