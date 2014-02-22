@@ -27,7 +27,7 @@ userApp.factory('UserService', function( $http ) {
          */
         initTotalDistance: function() {
             for (var i = this.users.length - 1; i >= 0; i--) {
-                this.total_distance += parseInt(this.users[i].distance);
+                this.total_distance += parseFloat(this.users[i].distance);
             };
             return this.total_distance;
         },
@@ -54,28 +54,21 @@ userApp.factory('UserService', function( $http ) {
          * @type {Int} - distance to add to the user
          */
         addDistance: function(user_id, distance) {
-            console.log(distance);
             for (var i = this.users.length - 1; i >= 0; i--) {
                 if (this.users[i].id == user_id) {
                     var put_data = {
                         'name': this.users[i].name,
                         'distance': distance
                     };
-                    this.users[i].distance += parseInt(distance);
+                    this.users[i].distance += parseFloat(distance);
                     $http({ method: 'PUT', url: '/users/', data: put_data })
                         .success(function( data, status, headers, config ) {
-                            console.log(data);
+                            return;
                         });
                 }
             };
             // Recalculate total
-            this.total_distance += parseInt(distance);
-        },
-
-        updateDistances: function() {
-            for (var i = this.users.length - 1; i >= 0; i--) {
-                this.users[i]
-            };
+            this.total_distance += parseFloat(distance);
         }
     }
 

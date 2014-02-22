@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <title>To The Moon</title>
     <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tothemoon.css">
 </head>
 <body>
+    <div class="main_content">
+        <div id="map" class="map_background">
+        </div>
+    </div>
     <div ng-app="UserApp">
-        <div class="row">
+<!--         <div class="row">
             <div class="small-12 columns">
                 <h1>To The Moon</h1>
             </div>
             <div class="row">
-                <div class="small-4 columns">
+                <div class="small-3 columns">
                     <div ng-controller="userController">
                         <div ng-repeat="user in users">
                             <div class="row">
@@ -47,10 +52,14 @@
                 </div>
             </div>
         </div>
-    </div>
+ -->    </div>
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.js"></script>
+    <script src="/static/vendor/d3/d3.min.js"></script>
     <script src="/static/vendor/angular/angular.min.js"></script>
-    <script src="/static/js/apps/userApp.js"></script>
+    <script src="/static/js/apps/userapp.js"></script>
     <script src="/static/js/controllers/userController.js"></script>
     <script src="/static/js/services/userService.js"></script>
+    <script src="/static/vendor/jquery/dist/jquery.js"></script>
+    <script src="/static/js/apps/mapDraw.js"></script>
 </body>
 </html>

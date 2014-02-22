@@ -16,17 +16,17 @@ app.team = {
     "users": [
         {
             "id": 1,
-            "name": "sam",
-            "distance": 1
+            "name": "Sam",
+            "distance": 0
         },
         {
             "id": 2,
-            "name": "dean",
-            "distance": 32
+            "name": "Dean",
+            "distance": 0
         },
         {
             "id": 3,
-            "name": "steve",
+            "name": "Steve",
             "distance": 0
         }
     ]
@@ -35,7 +35,7 @@ app.team = {
 
 @app.route("/")
 def index():
-    return render('jason-index.html')
+    return render('index.html')
 
 
 @app.route('/users/', methods=['PUT'])
@@ -62,4 +62,4 @@ def teams():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
