@@ -11,18 +11,20 @@
         <section class="map">
             <section class="controls-overlay">
                 <div class="logo control-element">
-                    <img class="logo-img" src="/static/images/logo.svg"/>
+                    <img class="logo-img" src="/static/images/TTM-logo.png"/>
                 </div>
                 <div class="side-menu control-element">
                     <span class="menu-buttons">
-                        <input id="profile-tab" name="currentTab" ng-model="currentTab" type="radio" value="profile"/><label for="profile-tab">profile</label>
-                        <input id="races-tab" name="currentTab" ng-model="currentTab" type="radio" value="races"/><label for="races-tab">races</label>
-                        <input id="toTheMoon-tab" name="currentTab" ng-model="currentTab" type="radio" value="toTheMoon"/><label for="toTheMoon-tab">toTheMoon</label>
+                        <input id="profile-tab" name="currentTab" ng-model="currentTab" type="radio" value="profile"/><label for="profile-tab"><img src="/static/images/icon-profile.png"></label>
+                        <input id="races-tab" name="currentTab" ng-model="currentTab" type="radio" value="races"/><label for="races-tab"><img src="/static/images/icon-mission.png"></label>
+                        <input id="toTheMoon-tab" name="currentTab" ng-model="currentTab" type="radio" value="toTheMoon"/><label for="toTheMoon-tab"><img src="/static/images/icon-moon.png"></label>
                     </span>
                     <span ng-switch on="currentTab" class="menu-display">
 
                         <!--no templates or nothing? yeah, this really is quick and dirty; mostly dirty-->
-                        <div ng-switch-when="profile">Profile</div>
+                        <div class="profile" ng-switch-when="profile">
+                            <div ng-include src="'/static/profile.html'"></div>
+                        </div>
                         <div ng-switch-when="races">Races</div>
                         <div ng-switch-when="toTheMoon">Moon</div>
 
