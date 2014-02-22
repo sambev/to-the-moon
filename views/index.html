@@ -19,7 +19,7 @@
                             <table style="width: 100%;">
                                 <tr ng-repeat="user in users">
                                     <td>{{ user.name }}</td>
-                                    <td>{{ user.distance }}</td>
+                                    <td>{{ user.distance | number:2}}</td>
                                     <td>Miles</td>
                                 </tr>
                             </table>
