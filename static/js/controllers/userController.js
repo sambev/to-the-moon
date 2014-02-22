@@ -6,6 +6,14 @@ userApp.controller('userController', function( $scope, $timeout, UserService ){
     req.then(function(res) {
         $scope.users = UserService.users;
     });
+
+    $scope.currentTab = 'profile'
+
+    // View Controls //////////////////
+    $scope.goToTab = function (tabName) {
+        $scope.currentTab = tabName;
+    }
+
     setInterval(function(){
         var req = UserService.getUsers();
         req.then(function(res) {
@@ -36,6 +44,3 @@ userApp.controller('distanceController', function( $scope, UserService ){
         };
     };
 });
-
-function updateUserData() {
-}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" ng-app="UserApp">
+<head>
+    <meta charset="UTF-8">
+    <title>To The Moon</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="main-page" ng-controller="userController">
+        
+        <section class="map">
+            <section class="controls-overlay">
+                <div class="logo control-element">
+                    <img class="logo-img" src="/static/images/TTM-logo.png"/>
+                </div>
+                <div class="side-menu control-element">
+                    <span class="menu-buttons">
+                        <input id="profile-tab" name="currentTab" ng-model="currentTab" type="radio" value="profile"/><label for="profile-tab"><img src="/static/images/icon-profile.png"></label>
+                        <input id="races-tab" name="currentTab" ng-model="currentTab" type="radio" value="races"/><label for="races-tab"><img src="/static/images/icon-mission.png"></label>
+                        <input id="toTheMoon-tab" name="currentTab" ng-model="currentTab" type="radio" value="toTheMoon"/><label for="toTheMoon-tab"><img src="/static/images/icon-moon.png"></label>
+                    </span>
+                    <span ng-switch on="currentTab" class="menu-display">
+
+                        <!--no templates or nothing? yeah, this really is quick and dirty; mostly dirty-->
+                        <div class="profile" ng-switch-when="profile">
+                            <div ng-include src="'/static/profile.html'"></div>
+                        </div>
+                        <div ng-switch-when="races">Races</div>
+                        <div ng-switch-when="toTheMoon">Moon</div>
+
+                        <div ng-switch-default></div>
+                    </span>
+                </div>
+            </section>
+
+            <section class="map-container">
+                <img class="map-itself" src="/static/images/test-map.png"/>
+            </section>
+        </section>
+       
+
+
+
+
+        <!-- <div class="row">
+            <div class="small-12 columns">
+                <h1>To The Moon</h1>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">
+                    <div ng-controller="userController">
+                        <div ng-repeat="user in users">
+                            <div class="row">
+                                <div class="small-6 columns">
+                                    <h4>{{ user.name }}</h4>
+                                </div>
+                                <div class="small-6 columns">
+                                    <h4>{{ user.distance }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="small-4 columns">
+                                <h4>Total: {{ total_distance }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-6 columns end">
+                    <div ng-controller="distanceController">
+                        <div ng-repeat="user in users">
+                            <div class="row">
+                                <div class="small-1 columns">
+                                    <input class="add_distance" type="text" ng-model="distance" />
+                                </div>
+                                <div class="small-4 columns end">
+                                    <a href="#" class="button" ng-click="addDistance(user.id, distance)">Add Distance</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <script src="/static/vendor/angular/angular.min.js"></script>
+    <script src="/static/js/apps/userApp.js"></script>
+    <script src="/static/js/controllers/userController.js"></script>
+    <script src="/static/js/services/userService.js"></script>
+</body>
+</html>

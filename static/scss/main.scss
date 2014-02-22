@@ -1,0 +1,129 @@
+$site-width: 760px;
+$site-vertical-pad: 10px;
+$site-primary-color: #313131;
+
+$controls-inset-top: 20px;
+$controls-inset-side: 20px;
+$controls-inset-bottom: 20px;
+$controls-vertical-spacing: 100px;
+$control-background: $site-primary-color;
+$control-background-dark: $site-primary-color;
+$control-padding: 10px;
+$control-disabled-color: #5A5A5A;
+
+
+
+@mixin standard-borders {
+	border: 1px solid $site-primary-color;
+}
+
+* {
+	//border: 1px solid $site-primary-color;
+	box-display: border-box;
+}
+
+.main-page {
+	//width: $site-width;
+	margin: 0px auto;
+	//padding-top: $site-vertical-pad;
+	position: relative;
+}
+
+.controls-overlay {
+
+	position: fixed;
+	width: 100%;
+	.control-element {
+		margin: 10px 0px;
+		position: fixed;
+		left: $controls-inset-side;	
+		background-color: $control-background;
+	}
+	.logo {
+
+		background-color: transparent;
+	}
+	.side-menu {
+		bottom: $controls-inset-bottom;
+		background-color: transparent;
+		.menu-buttons {
+			float: left;
+			background-color: transparent;		input[type=radio] {
+				display:none;
+				&:checked + label{
+					background-color: $control-background;
+				}
+				& + label {
+					overflow: hidden; 
+					padding: 5px;
+					display: block;
+					margin: 0px;
+					//border-top-left-radius: 5px;
+					//border-bottom-left-radius: 5px;
+					@include standard-borders;
+					background-color: $control-disabled-color;
+					opacity: .8;
+					list-style-type:none;
+    				line-height: 0;
+					& img {
+						width:30px;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+		.menu-display {
+			color: white;
+			opacity: .8;
+			padding: $control-padding;
+			float: left;
+			width: 250px;
+			background-color: $control-background;
+			@include standard-borders;
+			//border-radius: 5px;
+			min-height: 250px;
+			.menu-middle-section {
+				width: 100%;
+				border-top: 1px solid white;
+				border-bottom: 1px solid white;
+				padding: 10px 0px;
+				.span{
+					width:30px;
+					border-left: 1px solid white;
+					&:first-child {
+						border: none;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+
+.personal-info {
+	.svg-border{
+		fill: white;
+		stroke: white;
+	}
+	.svg-axis {
+		fill: white;
+		stroke: white;
+	}
+	.svg-middle {
+		background-image: url("/static/images/TTM-logo.png")
+	}
+}
+
+
+
+// IMAGE STUFF /////////////////////////
+
+.map-itself {
+	width: 100%;
+}
+.logo-img {
+	width: 100px;
+}
+

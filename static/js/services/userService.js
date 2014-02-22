@@ -12,6 +12,8 @@ userApp.factory('UserService', function( $http ) {
          */
         users: [],
 
+
+
         /*
          * @property total_distance
          * @type {Int} - total amount of distance for this user group
