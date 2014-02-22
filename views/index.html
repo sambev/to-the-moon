@@ -7,22 +7,26 @@
     <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/tothemoon.css">
     <link rel="stylesheet" href="/static/vendor/leaflet/dist/leaflet.css">
+    <link href='http://fonts.googleapis.com/css?family=Abel|Wire+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div ng-app="UserApp" style="height:100%;">
-        <div class="row" style="height:100%;">
+        <div class="row user-info" style="height:100%;">
             <div class="small-2 columns">
                 <h4>Mooners</h4>
                 <div class="row">
                     <div class="small-12 columns">
                         <div ng-controller="userController">
-                            <table style="width: 100%;">
-                                <tr ng-repeat="user in users">
-                                    <td>{{ user.name }}</td>
-                                    <td>{{ user.distance | number:2}}</td>
-                                    <td>Miles</td>
-                                </tr>
-                            </table>
+                            <div class="row" ng-repeat="user in users" style="color:white;">
+                                <div class="small-6 columns">
+                                    {{ user.name }}
+                                </div>
+                                <div class="small-6 columns end">
+                                    {{ user.distance | number:2 }} mi
+                                </div>
+                                <br>
+                                <br>
+                            </div>
                         </div>
                     </div>
                 </div>

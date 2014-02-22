@@ -16,17 +16,17 @@ app.team = {
     "users": [
         {
             "id": 1,
-            "name": "sam",
+            "name": "Sam",
             "distance": 0
         },
         {
             "id": 2,
-            "name": "dean",
+            "name": "Dean",
             "distance": 0
         },
         {
             "id": 3,
-            "name": "steve",
+            "name": "Steve",
             "distance": 0
         }
     ]
@@ -62,4 +62,4 @@ def teams():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
